@@ -77,7 +77,7 @@ class Instructions_send_payoff_B(Page):
     def is_displayed(player: Player):
         return player.subsession.round_number == 1 and player.treatment == 1
 
-class MyPage(Page):
+class MyPage_A(Page):
     form_model = 'player'
     form_fields = ['t_selection', 'n_selection']
 
