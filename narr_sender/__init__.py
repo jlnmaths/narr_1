@@ -49,7 +49,7 @@ class Player(BasePlayer):
     quiz5 = models.StringField(label="Sie wollen den Empfänger davon überzeugen, dass sich hinter dem Fragezeichen (?)...",
         choices=['...eine 0 verbirgt.', '...eine 1 verbirgt.'])
     quiz6 = models.StringField(label="Auszahlungsfrage Platzhalter", choices=['Test'])
-    quiz7 = models.StringField(label="Richtig oder falsch? Empfänger erhalten eine Auszahlungseinheit, sollte sich hinter dem Fragezeichen eine 1 verbergen.",
+    quiz7 = models.StringField(label="Richtig oder falsch? Empfänger erhalten eine Auszahlungseinheit, sollte sich hinter dem Fragezeichen (?) eine 1 verbergen.",
                                choices=['Richtig', 'Falsch'])
 
 
