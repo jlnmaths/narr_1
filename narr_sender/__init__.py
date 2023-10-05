@@ -48,10 +48,9 @@ class Player(BasePlayer):
         choices=['Richtig', 'Falsch'])
     quiz5 = models.StringField(label="Sie wollen den Empfänger davon überzeugen, dass sich hinter dem Fragezeichen (?)...",
         choices=['...eine 0 verbirgt.', '...eine 1 verbirgt.'])
-    quiz6 = models.StringField(label="Auszahlungsfrage Platzhalter")
-    quiz7 = models.StringField(label="Was trifft zu?",
-                                choices=['Empfänger und Sender sehen dieselbe Datentabelle mit Haupt- und Nebenbeobachtungen, aber die Empfänger sehen nur die Erklärungen, die ihnen von den Sendern geschickt wurden.',
-                                         'Empfänger sehen die Datentabelle mit Haupt- und Nebenbeobachtungen nur, wenn die Sender sie geschickt haben.'])
+    quiz6 = models.StringField(label="Auszahlungsfrage Platzhalter", choices=['Test'])
+    quiz7 = models.StringField(label="Richtig oder falsch? Empfänger erhalten eine Auszahlungseinheit, sollte sich hinter dem Fragezeichen eine 1 verbergen.",
+                               choices=['Richtig', 'Falsch'])
 
 
 def creating_session(subsession: Subsession):
@@ -163,7 +162,10 @@ class Quiz(Page):
 
     @staticmethod
     def error_message(player: Player, values):
-        solutions = dict(quiz1='Falsch', quiz2='Falsch', quiz3='Richtig', quiz4='Richtig', quiz5='...eine 1 verbirgt.', quiz6='Test', quiz7='Empfänger sehen die Datentabelle mit Haupt- und Nebenbeobachtungen nur, wenn die Sender sie geschickt haben.')
+        if player.treatment == 0:
+            solutions = dict(quiz1='Falsch', quiz2='Falsch', quiz3='Richtig', quiz4='Richtig', quiz5='...eine 1 verbirgt.', quiz6='Test', quiz7='Falsch')
+        else:
+            solutions = dict(quiz1='Falsch', quiz2='Falsch', quiz3='Richtig', quiz4='Richtig', quiz5='...eine 1 verbirgt.', quiz6='Test', quiz7='Richtig')
 
         if values != solutions:
             return "Eine oder mehrere Antworten waren leider falsch."
