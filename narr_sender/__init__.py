@@ -180,4 +180,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [Instructions, Instructions_send, Instructions_send_payoff_A, Instructions_send_payoff_B, Quiz, MyPage]
+page_sequence = [Instructions, Instructions_send, Instructions_send_payoff_A, Instructions_send_payoff_B, Quiz, MyPage_A]
