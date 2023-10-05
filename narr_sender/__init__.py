@@ -20,7 +20,7 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
-    treatment = models.CharField(initial = "A")
+    treatment = models.IntegerField(initial = "A")
     n_selection = models.StringField(
         choices=['Erklärung 1 unter der gewählten Tabelle', 'Erklärung 2 unter der gewählten Tabelle'],
         widget=widgets.RadioSelect,
