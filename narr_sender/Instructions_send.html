@@ -112,6 +112,7 @@ Um den Empfänger davon zu überzeugen, dass hinter dem Fragezeichen (?) eine 1 
     Der Empfänger sieht nur die von Ihnen ausgewählte Datentabelle und die zugehörige, von Ihnen ausgewählte Erklärung.
 </p>
 
-
+{{ player.subsession.round_number == 1 and player.treatment == 0 }}
+{{ player.subsession.round_number == 1 and player.treatment == 1 }}
     {{ next_button }}
 {{ endblock }}
