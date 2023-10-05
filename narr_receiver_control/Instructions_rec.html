@@ -1,0 +1,19 @@
+{{ block title }}
+    Receiver
+{{ endblock }}
+
+{{ block content }}
+
+<p>
+In diesem Experiment sehen Sie einen Datensatz und treffen Entscheidungen basierend auf dem Datensatz. Sie treffen insgesamt 6 unabhängige Entscheidungen, d.h. die Datensätze unterscheiden sich und Sie können nicht von einer Entscheidung auf die nächste schließen.
+</p>
+In der unteren Tabelle sehen Sie den Datensatz mit Beobachtungen, die jeweils 0 oder 1 sein können. In der ersten Zeile sehen Sie 8 Einträge von der Hauptbeobachtung; in Zeile 2 bis 4 sehen Sie jeweils 9 Einträge für 3 Nebenbeobachtungen (Spalte 2 bis 4). Die Einträge in den einzelnen Zeilen stellen Ereignisse dar, die jeweils in derselben Periode stattgefunden haben. In der 11. Zeile fehlt die Hauptbeobachtung, Sie sehen allerdings die Nebenbeobachtungen. Zwischen Haupt- und Nebenbeobachtungen kann ein kausaler Zusammenhang bestehen; dies muss aber nicht so sein. Ob kausal oder nicht, der Zusammenhang zwischen den Beobachtungen ist in jeder Periode derselbe.
+Beachten Sie, dass kein zeitlicher Zusammenhang zwischen den einzelnen Zeilen besteht. Es ist also nicht so, dass die Ereignisse, die zu den Einträgen in der ersten Zeile geführt haben, notwendigerweise vor den Einträgen in der 10. Zeile stattgefunden haben.
+<p>
+Ihre Aufgabe ist es einzuschätzen, ob hinter dem Fragezeichen (?) eine 0 oder eine 1 versteckt ist. Dabei sehen Sie die Datentabelle. Zusätzlich dazu erhalten Sie kurze Erklärungen von den Sendern, die Sie auf mögliche Zusammenhänge in den Daten hinweisen. Diese Erklärungen können Ihnen dabei helfen einzuschätzen, ob hinter dem Fragezeichen (?) eine 0 oder eine 1 versteckt ist.
+Die Erklärungen formulieren einen möglichen Zusammenhang zwischen Haupt- und Nebenbeobachtungen. Dabei kann es sich um den wahren Zusammenhang handeln; es muss aber nicht so sein. Zum Beispiel könnte es auch Zufall sein, dass die Hauptbeobachtung und eine der Nebenbeobachtungen gleichzeitig gleich 1 sind. Es könnte aber auch sein, dass eine der Beobachtungen gleich 1 ist, weil eine andere Beobachtung auch gleich 1 ist. Zu jedem Datensatz sehen Sie jeweils eine Erklärung.
+</p>
+
+
+    {{ next_button }}
+{{ endblock }}

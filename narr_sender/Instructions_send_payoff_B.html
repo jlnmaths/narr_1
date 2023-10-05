@@ -1,0 +1,13 @@
+{{ block title }}
+    Bezahlung
+{{ endblock }}
+
+{{ block content }}
+<p>
+    Hinter dem Fragezeichen ist entweder eine 1 oder eine 0 versteckt. Die Aufgabe des Ihnen zugeordneten Empfängers ist es, anzugeben, mit welcher Wahrscheinlichkeit sich dort eine 1 befindet. Je höher diese angegebene Wahrscheinlichkeit ist, desto höher ist auch Ihre Auszahlung.  Der Empfänger wird so bezahlt, dass es für ihn optimal ist, seine echte Einschätzung zu der Wahrscheinlichkeit anzugeben. Er erhält außerdem 1 Unit, sollte sich hinter dem Fragezeichen (?) eine 1 verbergen.
+</p>
+<p>
+    <h5>Genaue Zusammensetzung der Bezahlung:</h5>
+Sie erhalten einen festen Betrag von 1 Unit für Ihre Teilnahme am Experiment. Zusätzlich dazu wird eine Ihrer drei Entscheidungen zufällig ausgewählt. Wir wählen dann einen Empfänger zufällig aus, dem genau die von Ihnen gewählte Kombination von Datensatz und Erklärung gezeigt wurde. Dieser Empfänger hat eine Zahl p zwischen 0 und 100 angegeben, sie spiegelt die Wahrscheinlichkeit in Prozent wider, mit der er glaubt, dass sich hinter dem Fragezeichen (?) eine 1 verbirgt. Mit einer Wahrscheinlichkeit von p Prozent erhalten Sie eine weitere Unit. </p>
+    {{ next_button }}
+{{ endblock }}
