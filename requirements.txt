@@ -4,3 +4,5 @@
 otree>=5.4.0
 psycopg2>=2.8.4
 sentry-sdk==0.7.9
+numpy>=1.25.2
+scipy>=1.11.1
