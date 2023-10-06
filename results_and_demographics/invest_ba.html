@@ -1,0 +1,24 @@
+{{ block title }}
+Investition
+{{ endblock }}
+{{ block content }}
+    <style>
+    .image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .picture {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    </style>
+    <div class="image-container">
+      <img src="{{ static img_path }}" alt="Picture" class="picture">
+    </div>
+    {{ formfields }}
+    {{ next_button }}
+
+{{ endblock }}

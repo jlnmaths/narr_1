@@ -88,6 +88,28 @@ class Player(BasePlayer):
         'Wie bereit sind Sie, für gute Zwecke zu spenden, ohne eine Gegenleistung zu erwarten? Bitte geben Sie Ihre Antwort auf einer Skala von 0 bis 10 an, wobei 0 bedeutet, dass Sie "überhaupt nicht dazu bereit" sind, und 10 bedeutet, dass Sie "sehr dazu bereit" sind.',
         '', '', 10)
 
+    nie = models.StringField(label="Haben Sie in der Vergangenheit investiert?", choices=['Ich habe noch nie investiert! (Rest freilassen)', 'Ich habe in der Vergangenheit investiert (siehe unten)'])
+    sa = models.IntegerField(min=0, max=100, label="Welchen Anteil Ihres bisher investierten Geldes haben Sie in Staatsanleihen investiert? Geben Sie dies bitte in Prozent an.", initial = 0, blank=True)
+    ua = models.IntegerField(min=0, max=100, label="Welchen Anteil Ihres bisher investierten Geldes haben Sie in Unternehmensanleihen investiert? Geben Sie dies bitte in Prozent an.", initial = 0, blank=True)
+    bc = models.IntegerField(min=0, max=100, label="Welchen Anteil Ihres bisher investierten Geldes haben Sie in Blue Chip Aktien (große Unternehmen, z.B. Microsoft, Apple, Volkswagen) investiert? Geben Sie dies bitte in Prozent an.", initial = 0, blank=True)
+    immo = models.IntegerField(min=0, max=100, label="Welchen Anteil Ihres bisher investierten Geldes haben Sie in Immobilien (nicht für Eigengebrauch) investiert? Geben Sie dies bitte in Prozent an.", initial = 0, blank=True)
+    invf = models.IntegerField(min=0, max=100, label="Welchen Anteil Ihres bisher investierten Geldes haben Sie in Investmentfonds investiert? Geben Sie dies bitte in Prozent an.", initial = 0, blank=True)
+    etf =  models.IntegerField(min=0, max=100, label="Welchen Anteil Ihres bisher investierten Geldes haben Sie in ETFs investiert? Geben Sie dies bitte in Prozent an.", initial = 0, blank=True)
+    rohst = models.IntegerField(min=0, max=100, label="Welchen Anteil Ihres bisher investierten Geldes haben Sie in Rohstoffe investiert? Geben Sie dies bitte in Prozent an.", initial = 0, blank=True)
+    krypto = models.IntegerField(min=0, max=100, label="Welchen Anteil Ihres bisher investierten Geldes haben Sie in Kryptowährungen investiert? Geben Sie dies bitte in Prozent an.", initial = 0, blank=True)
+    andere = models.StringField(label="Haben Sie in nicht oben genannte Optionen investiert? (Bitte erläutern!)", blank=True)
+    freq = models.StringField(label="Wie oft tätigen Sie Investitionen?",
+        choices=['Täglich', 'Wöchentlich', 'Monatlich', 'Vierteljährlich', 'Halbjährlich', 'Jährlich', 'Seltener als Jährlich', 'Nie'])
+    environ = models.IntegerField(min=0, max=100, label="Wie viel Prozent Ihres Umfelds (Freunde, Verwandte, Kollegen) investieren in etwa?")
+    knowledge = likertScale(
+        'Als wie gut schätzen Sie Ihr Wissen über Finanzanlagen und Investitionen ein? Bitte geben Sie Ihre Antwort auf einer Skala von 0 bis 10 an, wobei 0 bedeutet, dass Sie sehr wenig wissen, und 10 bedeutet, dass Sie sehr viel wissen.',
+        '', '', 10)
+    covid = models.IntegerField(choices=[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
+    widget=widgets.RadioSelectHorizontal,
+       label= 'Hat die COVID-Pandemie Ihre Wahrnehmung finanzieller Risiken verändert? Bitte geben Sie Ihre Antwort auf einer Skala von -5 bis 5 an, wobei 0 bedeutet, dass sich nichts verändert hat, -5 bedeutet, dass Sie viel risikoaverser geworden sind, und 5 bedeutet, dass sie viel risikofreudiger geworden sind.')
+    investment = models.StringField(label="Für welche Investition würden Sie sich entscheiden?",
+        choices=['Investition 1','Investition 2', 'Investition 3', 'Investition 4', 'Investition 5','Investition 6','Investition 7','Investition 8' ])
+
 
 # PAGES
 class Demographics(Page):
@@ -98,7 +120,22 @@ class Risk_Narratives(Page):
     form_model = 'player'
     form_fields = ['TimeSurvey', 'RiskSurvey', 'AltruismSurvey', 'simplicity_1', 'simplicity_2', 'dataverbal_1', 'dataverbal_2']
 
+class assets_ba(Page):
+    form_model = 'player'
+    form_fields = ['nie','sa', 'ua', 'bc', 'immo', 'invf', 'etf', 'rohst', 'krypto', 'andere']
 
+class risk_ba(Page):
+    form_model = 'player'
+    form_fields = ['freq', 'environ', 'knowledge', 'covid']
+
+class invest_ba(Page):
+    form_model = 'player'
+    form_fields = ['investment']
+    def vars_for_template(player: Player):
+        img_path = 'Download.jpg'
+        return dict(
+            img_path = img_path
+        )
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -108,4 +145,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [Demographics, Risk_Narratives, Results]
+page_sequence = [Demographics, Risk_Narratives,invest_ba, risk_ba, assets_ba, Results]
