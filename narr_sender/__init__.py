@@ -171,7 +171,7 @@ class Quiz_A(Page):
 
 class Quiz_B(Page):
     form_model = 'player'
-    form_fields = ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6', 'quiz7']
+    form_fields = ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6']
 
     @staticmethod
     def error_message(player: Player, values):
