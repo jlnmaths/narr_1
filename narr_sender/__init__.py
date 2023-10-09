@@ -48,8 +48,7 @@ class Player(BasePlayer):
         choices=['Richtig', 'Falsch'])
     quiz5 = models.StringField(label="Sie wollen den Empfänger davon überzeugen, dass sich hinter dem Fragezeichen (?)...",
         choices=['...eine 0 verbirgt.', '...eine 1 verbirgt.'])
-    quiz6 = models.StringField(label="Auszahlungsfrage Platzhalter", choices=['Test'])
-    quiz7 = models.StringField(label="Richtig oder falsch? Empfänger erhalten eine Auszahlungseinheit, sollte sich hinter dem Fragezeichen (?) eine 1 verbergen.",
+    quiz6 = models.StringField(label="Richtig oder falsch? Empfänger erhalten einen Bonus von 1€, sollte sich hinter dem Fragezeichen (?) eine 1 verbergen.",
                                choices=['Richtig', 'Falsch'])
 
 
@@ -156,23 +155,33 @@ class MyPage_A(Page):
         player.finishtime = int(time.time())
 
 
-class Quiz(Page):
+class Quiz_A(Page):
     form_model = 'player'
-    form_fields = ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6', 'quiz7']
+    form_fields = ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6']
 
     @staticmethod
     def error_message(player: Player, values):
-        if player.treatment == 0:
-            solutions = dict(quiz1='Falsch', quiz2='Falsch', quiz3='Richtig', quiz4='Richtig', quiz5='...eine 1 verbirgt.', quiz6='Test', quiz7='Falsch')
-        else:
-            solutions = dict(quiz1='Falsch', quiz2='Falsch', quiz3='Richtig', quiz4='Richtig', quiz5='...eine 1 verbirgt.', quiz6='Test', quiz7='Richtig')
-
+        solutions = dict(quiz1='Falsch', quiz2='Falsch', quiz3='Richtig', quiz4='Richtig', quiz5='...eine 1 verbirgt.', quiz6='Falsch')
         if values != solutions:
             return "Eine oder mehrere Antworten waren leider falsch."
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.subsession.round_number == 1
+        return player.subsession.round_number == 1 and player.treatment == 0
+
+class Quiz_B(Page):
+    form_model = 'player'
+    form_fields = ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6', 'quiz7']
+
+    @staticmethod
+    def error_message(player: Player, values):
+        solutions = dict(quiz1='Falsch', quiz2='Falsch', quiz3='Richtig', quiz4='Richtig', quiz5='...eine 1 verbirgt.', quiz6='Richtig')
+        if values != solutions:
+            return "Eine oder mehrere Antworten waren leider falsch."
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.subsession.round_number == 1 and player.treatment == 1
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -182,4 +191,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [Instructions, Instructions_send, Instructions_send_payoff_A, Instructions_send_payoff_B, Quiz, MyPage_A]
+page_sequence = [Instructions, Instructions_send, Instructions_send_payoff_A, Instructions_send_payoff_B, Quiz_A, Quiz_B, MyPage_A]

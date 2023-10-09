@@ -1,0 +1,209 @@
+{{ block title }}
+    Quiz
+{{ endblock }}
+{{ block content }}
+<style>
+        /* Styles for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;i
+        }
+
+        /* Styles for the overlay background */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        /* Add CSS for the scrollable content */
+        .popup-content {
+            max-height: 400px; /* Set a maximum height for the scrollable area */
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds the max height */
+            padding: 10px; /* Adjust padding as needed */
+        }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+
+    Um fortzufahren, bestätigen Sie bitte durch Beantwortung der unten angegebenen Fragen, dass Sie die Instruktionen aufmerksam gelesen haben!
+    {{ formfields }}
+
+    <p>
+    <!-- Button to trigger the popup -->
+        <button id="openPopupButton" type="button">Instruktionen nochmal anzeigen!</button>
+    </p>
+    <!-- Popup content -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p>
+                Liebe TeilnehmerInnen,
+            </p>
+            <p>
+            herzlich willkommen beim heutigen Experiment! <br>
+            Bitte lesen Sie die Anleitungen zum Experiment genau durch. Alle Aussagen in den Anleitungen entsprechen der Wahrheit. Die Höhe Ihrer Auszahlung am Ende des Experiments hängt auch davon ab, wie gut Sie die Anleitungen verstanden haben. Ihre Auszahlung erhalten Sie per Überweisung.  Halten Sie daher bitte Ihre IBAN bereit. Bitte beachten Sie, dass es ein paar Tage dauern kann, bis das Geld auf Ihrem Konto ist. <br>
+            Das Experiment sowie die Auswertung der Daten erfolgen anonym. <br>
+            Sämtliche personenbezogenen Bezeichnungen im Experiment beziehen sich gleichermaßen auf Frauen und Männer.
+            </p>
+            <p>
+            In diesem Experiment gibt es zwei Rollen, Sender und Empfänger. Wer welche Rolle übernimmt, wird zufällig bestimmt. Sie behalten Ihre Rolle während des gesamten Experiments bei.
+            </p>
+
+            <p>
+            In diesem Experiment treffen Sie insgesamt 3 unabhängige Entscheidungen, wobei unabhängig bedeutet, dass sie nicht von einer Entscheidung auf die nächste schließen können. In jeder Entscheidung sehen Sie zwei Datensätze in Form von Tabellen und vier Erklärungen, zwei pro Tabelle. Jede Erklärung weist auf einen Zusammenhang zwischen den Werten in der Tabelle hin.
+            </p>
+            <p>
+              <h4>Die Datensätze</h4>
+                Die Tabellen präsentieren einen Datensatz bestehend aus 9 Zeilen und 4 Spalten:
+                Jeder Eintrag in einer Zelle der Tabelle kann jeweils 0 oder 1 sein. In der ersten Spalte sehen Sie 8 Einträge von der Hauptbeobachtung (HB); in Spalte 2 bis 4 sehen Sie jeweils 9 Einträge für 3 Nebenbeobachtungen (NB). Die Einträge in den einzelnen Zeilen stellen Ereignisse dar, die jeweils in derselben Periode stattgefunden haben. In der 9. Zeile fehlt die Hauptbeobachtung, Sie sehen allerdings die Nebenbeobachtungen. Zwischen Haupt- und Nebenbeobachtungen kann ein kausaler Zusammenhang bestehen; dies muss aber nicht so sein. Ob kausal oder nicht, der Zusammenhang zwischen den Beobachtungen ist in jeder Periode derselbe.
+                Beachten Sie, dass kein zeitlicher Zusammenhang zwischen den einzelnen Zeilen besteht. Es ist also nicht so, dass die Ereignisse, die zu den Einträgen in der ersten Zeile geführt haben, notwendigerweise vor den Einträgen in der 10. Zeile stattgefunden haben.
+            </p>
+
+            <h5> Beispieltabelle: </h5>
+            <table>
+                      <thead>
+                        <tr>
+                          <th>HB</th>
+                          <th>NB1</th>
+                          <th>NB2</th>
+                          <th>NB3</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                        <tr>
+                          <td>?</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+            <p>
+              <h4> Die Erklärungen </h4>
+              Die Erklärungen sind Beobachtungen zu dem Zusammenhang zwischen der Hauptbeobachtung und den Nebenbeobachtungen.
+              Beispielerklärung zur obigen Tabelle: Immer, wenn NB1 gleich 1 ist, ist auch die HB gleich 1.
+            </p>
+            <p>
+              <h4> Ihre Entscheidung </h4>
+            Ihre Aufgabe ist es, einen Empfänger davon zu überzeugen, dass der hinter dem Fragezeichen (?) versteckte Eintrag in der letzten Zeile der Hauptbeobachtung gleich 1 ist. Auf einer Skala von 0 bis 100 kann der Empfänger angeben, für wie wahrscheinlich er es hält, dass eben dieser Eintrag gleich 1 ist. Dabei sind die Nebenbeobachtungen wie angegeben in der Tabelle.
+            </p>
+            <p>
+            Um den Empfänger davon zu überzeugen, dass hinter dem Fragezeichen (?) eine 1 versteckt ist, haben Sie verschiedene Entscheidungsvariablen. Ihnen werden zwei Tabellen angezeigt, deren Inhalt sich leicht voneinander unterscheidet. Zu jeder der Tabellen werden Ihnen zwei Erklärungen angezeigt, die argumentieren, dass sich hinter dem Fragezeichen (?) eine 1 verbirgt. Sie müssen zunächst eine der beiden Tabellen auswählen, und dann eine der beiden zu dem Datensatz gehörenden Erklärungen. Die von Ihnen ausgewählte Kombination aus Datensatz und Erklärung wird an den Empfänger gesendet.
+            </p>
+
+            <p>
+                Der Empfänger sieht nur die von Ihnen ausgewählte Datentabelle und die zugehörige, von Ihnen ausgewählte Erklärung.
+            </p>
+        <p>
+            Sie erhalten einen festen Betrag von 1,50€ für Ihre Teilnahme am Experiment. Zusätzlich dazu erhalten Sie bis zu 3€, wobei die Höhe der Auszahlung von Ihren Entscheidungen im Experiment abhängt. Sie können also zwischen 1,50€ und 4,50€ verdienen.
+        </p>
+        <p>
+            Hinter dem Fragezeichen ist entweder eine 1 oder eine 0 versteckt. Die Aufgabe des Ihnen zugeordneten Empfängers ist es, anzugeben, mit welcher Wahrscheinlichkeit sich dort eine 1 befindet. Je höher diese angegebene Wahrscheinlichkeit ist, desto höher ist auch Ihre Auszahlung.  Der Empfänger wird so bezahlt, dass es für ihn optimal ist, seine echte Einschätzung zu der Wahrscheinlichkeit anzugeben.
+        </p>
+        <p>
+            <h5>Genaue Zusammensetzung der Bezahlung:</h5>
+             Zur Berechnung Ihrer Zusatzahlung von bis zu 3€ wird eine Ihrer drei Entscheidungen zufällig ausgewählt. Wir wählen dann einen Empfänger zufällig aus, dem genau die von Ihnen gewählte Kombination von Datensatz und Erklärung gezeigt wird. Dieser Empfänger gibt eine Zahl p zwischen 0 und 100 an. Dieses p spiegelt die Wahrscheinlichkeit in Prozent wider, mit der er glaubt, dass sich hinter dem Fragezeichen (?) eine 1 verbirgt. Mit einer Wahrscheinlichkeit von p Prozent erhalten Sie weitere 3€.
+        </p>
+        </div>
+        <button id="closePopupButton">Schließen</button>
+    </div>
+
+    <!-- Overlay background -->
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        // JavaScript to handle the popup functionality
+        const openPopupButton = document.getElementById('openPopupButton');
+        const closePopupButton = document.getElementById('closePopupButton');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+
+        openPopupButton.addEventListener('click', () => {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        closePopupButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+    </script>
+
+
+
+
+
+    {{ next_button }}
+
+{{ endblock }}
