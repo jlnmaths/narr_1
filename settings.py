@@ -6,7 +6,6 @@ SESSION_CONFIGS = [
         name='sender_test',
         display_name="Test for Narratives App",
         app_sequence=['narr_sender', 'results_and_demographics'],
-        #app_sequence=['narr_receiver_ex1', 'results_and_demographics'],
         num_demo_participants=100,
     )
 ]
@@ -17,7 +16,8 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=3.00, participation_fee=1.50, doc=""
+    real_world_currency_per_point=3.00, participation_fee=1.50, doc="",
+    {'limesurvey_link': 'https://limesurvey.urz.uni-heidelberg.de/index.php/886665?lang=de'},
 )
 
 PARTICIPANT_FIELDS = ['true_y', 'payround']

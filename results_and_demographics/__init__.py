@@ -57,9 +57,6 @@ class Player(BasePlayer):
                                    label="Mein höchster Bildungsabschluss ist:")
     country = models.StringField(label="Ich lebe in:")
 
-    iban = models.StringField(label="IBAN (für Vergütung):")
-    name = models.StringField(label="Name des Kontoinhabers (für Vergütung):")
-
     study = models.StringField(label="Was studieren Sie?")
     politics =likertScale(
         'Auf einer Skala von 1 bis 10, bei der 1 für sehr links und 10 für sehr rechts steht, wo ordnen Sie sich politisch ein?',
@@ -114,7 +111,7 @@ class Player(BasePlayer):
 # PAGES
 class Demographics(Page):
     form_model = 'player'
-    form_fields = ['yearOfBirth', 'male', 'education', 'country', 'study', 'politics', 'iban', 'name']
+    form_fields = ['yearOfBirth', 'male', 'education', 'country', 'study', 'politics']
 
 class Risk_Narratives(Page):
     form_model = 'player'
@@ -123,6 +120,10 @@ class Risk_Narratives(Page):
 class assets_ba(Page):
     form_model = 'player'
     form_fields = ['nie','sa', 'ua', 'bc', 'immo', 'invf', 'etf', 'rohst', 'krypto', 'andere']
+    @staticmethod
+    def error_message(player, values):
+        if  values["sa"] + values["ua"] + values["bc"] + values["immo"] + values["invf"] + values["etf"] + values["rohst"] + values["krypto"] > 100:
+            return 'Die Prozentpunkte ergeben in Summe mehr als 100 Prozent!'
 
 class risk_ba(Page):
     form_model = 'player'
@@ -142,7 +143,10 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-    pass
+    @staticmethod
+    def vars_for_template(player: Player):
+        combined_link = player.subsession.session.config['limesurvey_link'] + f'&PAYMENTCODE={player.participant.label}'
+        return dict(combined_link=combined_link)
 
 
 page_sequence = [Demographics, Risk_Narratives,invest_ba, risk_ba, assets_ba, Results]
