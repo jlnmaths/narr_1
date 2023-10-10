@@ -75,7 +75,7 @@ class Instructions_send_payoff_B(Page):
     def is_displayed(player: Player):
         return player.subsession.round_number == 1 and player.treatment == 1
 
-class MyPage_A(Page):
+class Sender_Survey(Page):
     form_model = 'player'
     form_fields = ['t_selection', 'n_selection']
 
@@ -191,4 +191,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [Instructions, Instructions_send, Instructions_send_payoff_A, Instructions_send_payoff_B, Quiz_A, Quiz_B, MyPage_A]
+page_sequence = [Instructions, Instructions_send, Instructions_send_payoff_A, Instructions_send_payoff_B, Quiz_A, Quiz_B, Sender_Survey]
