@@ -16,8 +16,8 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=3.00, participation_fee=1.50, doc="",
     {'limesurvey_link': 'https://limesurvey.urz.uni-heidelberg.de/index.php/886665?lang=de'},
+    real_world_currency_per_point=3.00, participation_fee=1.50, doc="",
 )
 
 PARTICIPANT_FIELDS = ['true_y', 'payround']
