@@ -1,0 +1,210 @@
+{{ block title }}
+    Quiz
+{{ endblock }}
+{{ block content }}
+<style>
+        /* Styles for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;i
+        }
+        .hidden {
+          display: none;
+        }
+        /* Styles for the overlay background */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        /* Add CSS for the scrollable content */
+        .popup-content {
+            max-height: 400px; /* Set a maximum height for the scrollable area */
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds the max height */
+            padding: 10px; /* Adjust padding as needed */
+        }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+
+    Um fortzufahren, bestätigen Sie bitte durch Beantwortung der unten angegebenen Fragen, dass Sie die Instruktionen aufmerksam gelesen haben!
+    {{ formfields }}
+
+    <p>
+    <!-- Button to trigger the popup -->
+        <button id="openPopupButton" type="button">Instruktionen nochmal anzeigen!</button>
+    </p>
+    <!-- Popup content -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p>
+                Liebe TeilnehmerInnen,
+            </p>
+            <p>
+            herzlich willkommen beim heutigen Experiment! <br>
+            Bitte lesen Sie die Anleitungen zum Experiment genau durch. Alle Aussagen in den Anleitungen entsprechen der Wahrheit. Die Höhe Ihrer Auszahlung am Ende des Experiments hängt auch davon ab, wie gut Sie die Anleitungen verstanden haben. Ihre Auszahlung erhalten Sie per Überweisung.  Halten Sie daher bitte Ihre IBAN bereit. Bitte beachten Sie, dass es ein paar Tage dauern kann, bis das Geld auf Ihrem Konto ist. <br>
+            Das Experiment sowie die Auswertung der Daten erfolgen anonym. <br>
+            Sämtliche personenbezogenen Bezeichnungen im Experiment beziehen sich gleichermaßen auf Frauen und Männer.
+            </p>
+            <p>
+            In diesem Experiment gibt es zwei Rollen, Sender und Empfänger. Wer welche Rolle übernimmt, wird zufällig bestimmt. Sie behalten Ihre Rolle während des gesamten Experiments bei.
+            </p>
+
+            <p>
+            In diesem Experiment sehen Sie Datensätze und treffen Entscheidungen basierend auf diesen. Sie treffen insgesamt sechs unabhängige Entscheidungen zu sechs verschiedenen Datensätze. Unabhängig bedeutet, hier dass Sie nicht von einer Entscheidung auf die nächste schließen können.
+            </p>
+              <h4>Datensätze</h4>
+            <p>
+            Die Datensätze werden in Tabellen präsentiert, wie in der Beispieltabelle unten. Jede Zelle kann eine 0 oder eine 1 beinhalten. In der ersten Spalte sehen Sie 8 Einträge von der Hauptbeobachtung (HB); in Spalte 2 bis 4 sehen Sie jeweils 9 Einträge für 3 Nebenbeobachtungen (NB). Die Einträge in den einzelnen Zeilen stellen Beobachtungen dar, die jeweils gleichzeitig gemacht wurden. Beachten Sie, dass kein zeitlicher Zusammenhang zwischen den einzelnen Zeilen besteht. Es ist also nicht so, dass die Ereignisse, die zu den Einträgen in der ersten Zeile geführt haben, notwendigerweise vor den Einträgen in der 9. Zeile stattgefunden haben. In der 9. Zeile fehlt die Hauptbeobachtung, Sie sehen allerdings die Nebenbeobachtungen. Zwischen Haupt- und Nebenbeobachtungen kann ein kausaler Zusammenhang bestehen; dies muss aber nicht so sein. Ob kausal oder nicht, der Zusammenhang zwischen den Beobachtungen ist in jeder Zeile derselbe.
+            </p>
+            <h5>  Beispieltabelle:</h5>
+            <table>
+                      <thead>
+                        <tr>
+                          <th>HB</th>
+                          <th>NB1</th>
+                          <th>NB2</th>
+                          <th>NB3</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                        <tr>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                        <tr>
+                          <td>?</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+            <p>
+              <h4>Ihre Aufgabe</h4>
+              Ihre Aufgabe ist es einzuschätzen, ob hinter dem Fragezeichen (?) eine 0 oder eine 1 versteckt ist. Dabei sehen Sie die Datentabelle. Zusätzlich dazu erhalten Sie eine kurze Erklärung von einem Sender, die Sie auf einen möglichen Zusammenhang in den Daten hinweist. Diese Erklärungen können Ihnen dabei helfen einzuschätzen, ob hinter dem Fragezeichen (?) eine 0 oder eine 1 versteckt ist.
+              Die Erklärungen formulieren einen möglichen Zusammenhang zwischen Haupt- und Nebenbeobachtungen. Dabei kann es sich um den wahren Zusammenhang handeln; es muss aber nicht so sein. Zum Beispiel könnte es auch Zufall sein, dass die Hauptbeobachtung (HB) und eine der Nebenbeobachtungen (NB) gleichzeitig gleich 1 sind. Es könnte aber auch sein, dass eine der Beobachtungen gleich 1 ist, weil eine andere Beobachtung auch gleich 1 ist. Zu jedem Datensatz sehen Sie jeweils eine einzelne Erklärung.
+            </p>
+
+
+            <p>
+                Sie erhalten eine sichere Auszahlung von 1€ für Ihre Teilnahme. Zusätzlich dazu erhalten Sie eine Auszahlung von bis zu 3€, die von Ihren Antworten im Experiment abhängt, und eine Auszahlung von bis zu 1€, je nachdem, ob sich hinter dem Fragezeichen eine 1 oder eine 0 verbirgt. Sie können also zwischen 1,00€ und 5,00€ verdienen.
+            </p>
+            <p>Hinter dem Fragezeichen (?) ist entweder eine 1 oder eine 0 versteckt. Ihre Auszahlung hängt von der von Ihnen angegebenen Wahrscheinlichkeit ab und davon, ob sich hinter dem Fragezeichen (?) tatsächlich eine 1 verbirgt.
+               Die Auszahlung wird so berechnet, dass es für Sie zur höchsten erwarteten Auszahlung führt, wenn Sie Ihre echte Einschätzung der Wahrscheinlichkeit angeben. Sie erhalten außerdem einen Bonus von 1€, sollte sich hinter dem Fragezeichen (?) eine 1 verbergen.
+            </p>
+            <p>
+                <button  id="btn" type="button" onclick="toggleDataVisibility()">Technische Details zur Auszahlungsberechnung anzeigen.</button>
+            </p>
+            <p id="hid" class="hidden">Details zur Auszahlung: Im Folgenden bezeichne q die von Ihnen angegebene Wahrscheinlichkeit, dass sich hinter dem Fragezeichen (?) eine 1 verbirgt. Nachdem Sie q angegeben haben, wird mithilfe des wahren Wertes hinter dem Fragezeichen (?) Ihre Auszahlung durch eine Lotterie entschieden. Sollte in der Tat eine 1 hinter dem Fragezeichen (?) sein, erhalten Sie eine Auszahlung von 3€ mit einer Wahrscheinlichkeit von 1-(1-q)*(1-q). Sollte sich dort stattdessen eine 0 verbergen, so erhalten Sie 3€ mit einer Wahrscheinlichkeit von 1-q*q.</p>
+
+            <p>
+                Zusätzlich zu Ihrer Einschätzung der Wahrscheinlichkeit fragen wir Sie nach jeder Entscheidung, wie sicher Sie sich sind, dass Ihre Einschätzung zutreffend ist.
+            </p>
+
+        </div>
+        <button id="closePopupButton" type="button">Schließen</button>
+    </div>
+
+    <!-- Overlay background -->
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        // JavaScript to handle the popup functionality
+        const openPopupButton = document.getElementById('openPopupButton');
+        const closePopupButton = document.getElementById('closePopupButton');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+
+        openPopupButton.addEventListener('click', () => {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        closePopupButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+         function toggleDataVisibility() {
+            var hidden = document.getElementById('hid');
+            var btn = document.getElementById('btn');
+            hidden.style.display = "block";
+            btn.style.display = "none";
+         }
+    </script>
+
+
+
+
+
+    {{ next_button }}
+
+{{ endblock }}

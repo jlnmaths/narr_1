@@ -1,0 +1,36 @@
+{{ block title }}
+    Bezahlung
+{{ endblock }}
+
+{{ block content }}
+<style>
+     .hidden {
+        display: none;
+    }
+</style>
+<script>
+    function toggleDataVisibility() {
+        var hidden = document.getElementById('hid');
+        var btn = document.getElementById('btn');
+        hidden.style.display = "block";
+        btn.style.display = "none";
+  }
+</script>
+<p>
+    Sie erhalten eine sichere Auszahlung von 1,50€ für Ihre Teilnahme. Zusätzlich dazu erhalten Sie eine Auszahlung von bis zu 3€, die von Ihren Antworten im Experiment abhängt. Sie können als zwischen 1,50€ und 4,50€ verdienen.
+</p>
+<p>Hinter dem Fragezeichen (?) ist entweder eine 1 oder eine 0 versteckt. Ihre Auszahlung hängt von der von Ihnen angegebenen Wahrscheinlichkeit ab und davon, ob sich hinter dem Fragezeichen (?) tatsächlich eine 1 verbirgt.
+   Die Auszahlung wird so berechnet, dass es für Sie zur höchsten erwarteten Auszahlung führt, wenn Sie Ihre echte Einschätzung der Wahrscheinlichkeit angeben.
+</p>
+<p>
+    <button  id="btn" type="button" onclick="toggleDataVisibility()">Technische Details zur Auszahlungsberechnung anzeigen.</button>
+</p>
+<p id="hid" class="hidden">Details zur Auszahlung: Im Folgenden bezeichne q die von Ihnen angegebene Wahrscheinlichkeit, dass sich hinter dem Fragezeichen (?) eine 1 verbirgt. Nachdem Sie q angegeben haben, wird mithilfe des wahren Wertes hinter dem Fragezeichen (?) Ihre Auszahlung durch eine Lotterie entschieden. Sollte in der Tat eine 1 hinter dem Fragezeichen (?) sein, erhalten Sie eine Auszahlung von 3€ mit einer Wahrscheinlichkeit von 1-(1-q)*(1-q). Sollte sich dort stattdessen eine 0 verbergen, so erhalten Sie 3€ mit einer Wahrscheinlichkeit von 1-q*q.</p>
+
+<p>
+    Zusätzlich zu Ihrer Einschätzung der Wahrscheinlichkeit fragen wir Sie nach jeder Entscheidung, wie sicher Sie sich sind, dass Ihre Einschätzung zutreffend ist.
+</p>
+
+
+    {{ next_button }}
+{{ endblock }}

@@ -3,9 +3,9 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='sender_test',
+        name='pilot',
         display_name="Test for Narratives App",
-        app_sequence=['narr_sender', 'results_and_demographics'],
+        app_sequence=['narr_sender', 'narr_receiver_ex1', 'results_and_demographics'],
         num_demo_participants=100,
     )
 ]
@@ -20,7 +20,7 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=3.00, participation_fee=1.50, doc="",
 )
 
-PARTICIPANT_FIELDS = ['true_y', 'payround']
+PARTICIPANT_FIELDS = ['true_y', 'payround', 'treatment']
 SESSION_FIELDS = []
 
 # ISO-639 code
@@ -33,9 +33,8 @@ USE_POINTS = False
 
 ROOMS = [
     dict(
-        name='Narratives',
-        display_name='Narratives',
-        participant_label_file='_rooms/narr.txt',
+        name='Narratives_Pilot',
+        display_name='Pilot for Narratives Experiment',
     ),
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
 ]

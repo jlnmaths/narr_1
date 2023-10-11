@@ -122,7 +122,7 @@ class assets_ba(Page):
     form_fields = ['nie','sa', 'ua', 'bc', 'immo', 'invf', 'etf', 'rohst', 'krypto', 'andere']
     @staticmethod
     def error_message(player, values):
-        if  values["sa"] + values["ua"] + values["bc"] + values["immo"] + values["invf"] + values["etf"] + values["rohst"] + values["krypto"] > 100:
+        if values["sa"] + values["ua"] + values["bc"] + values["immo"] + values["invf"] + values["etf"] + values["rohst"] + values["krypto"] > 100:
             return 'Die Prozentpunkte ergeben in Summe mehr als 100 Prozent!'
 
 class risk_ba(Page):
@@ -148,5 +148,19 @@ class Results(Page):
         combined_link = player.subsession.session.config['limesurvey_link'] + f'&PAYMENTCODE={player.participant.label}'
         return dict(combined_link=combined_link)
 
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.treatment > 1
+
+
+class Results_Sen(Page):
+    @staticmethod
+    def vars_for_template(player: Player):
+        combined_link = player.subsession.session.config['limesurvey_link'] + f'&PAYMENTCODE={player.participant.label}'
+        return dict(combined_link=combined_link)
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.treatment < 2
 
 page_sequence = [Demographics, Risk_Narratives,invest_ba, risk_ba, assets_ba, Results]

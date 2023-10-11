@@ -20,7 +20,6 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
-    treatment = models.IntegerField(initial = 5)
     n_selection = models.StringField(
         choices=['Erklärung 1 unter der gewählten Tabelle', 'Erklärung 2 unter der gewählten Tabelle'],
         widget=widgets.RadioSelect,
@@ -54,26 +53,26 @@ class Player(BasePlayer):
 
 def creating_session(subsession: Subsession):
     import itertools
-    treatments = itertools.cycle([0, 1])
+    treatments = itertools.cycle([0, 1, 2, 3, 4, 5])
     for player in subsession.get_players():
-        player.treatment = next(treatments)
+        player.participant.treatment = next(treatments)
 
 # PAGES
 class Instructions(Page):
     def is_displayed(player: Player):
-        return player.subsession.round_number == 1
+        return player.subsession.round_number == 1 and player.participant.treatment < 2
 
 class Instructions_send(Page):
     def is_displayed(player: Player):
-        return player.subsession.round_number == 1
+        return player.subsession.round_number == 1 and player.participant.treatment < 2
 
 class Instructions_send_payoff_A(Page):
     def is_displayed(player: Player):
-        return player.subsession.round_number == 1 and player.treatment == 0
+        return player.subsession.round_number == 1 and player.participant.treatment == 0
 
 class Instructions_send_payoff_B(Page):
     def is_displayed(player: Player):
-        return player.subsession.round_number == 1 and player.treatment == 1
+        return player.subsession.round_number == 1 and player.participant.treatment == 1
 
 class Sender_Survey(Page):
     form_model = 'player'
@@ -150,6 +149,10 @@ class Sender_Survey(Page):
         )
 
     @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.treatment < 2
+
+    @staticmethod
     def before_next_page(player: Player, timeout_happened):
         import time
         player.finishtime = int(time.time())
@@ -167,7 +170,7 @@ class Quiz_A(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.subsession.round_number == 1 and player.treatment == 0
+        return player.subsession.round_number == 1 and player.participant.treatment == 0
 
 class Quiz_B(Page):
     form_model = 'player'
@@ -181,7 +184,7 @@ class Quiz_B(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.subsession.round_number == 1 and player.treatment == 1
+        return player.subsession.round_number == 1 and player.participant.treatment == 1
 
 class ResultsWaitPage(WaitPage):
     pass
