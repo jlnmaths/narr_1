@@ -33,6 +33,7 @@ class Player(BasePlayer):
     o = models.StringField()
     lr = models.StringField()
     nb = models.StringField()
+    treatment = models.IntegerField(initial=7)
 
     starttime = models.IntegerField(initial=0)
     finishtime = models.IntegerField(initial=0)
@@ -56,6 +57,8 @@ def creating_session(subsession: Subsession):
     treatments = itertools.cycle([0, 1, 2, 3, 4, 5])
     for player in subsession.get_players():
         player.participant.treatment = next(treatments)
+        player.treatment = player.participant.treatment
+
 
 # PAGES
 class Instructions(Page):

@@ -43,8 +43,12 @@ class Player(BasePlayer):
     certainty =likertScale(
         'Auf einer Skala von 1 bis 10, bei der 1 für sehr unsicher und 10 für sehr sicher steht, wie sicher sind Sie sich, dass ihre Einschätzung zutreffend war?',
         '', '', 10)
+    treatment = models.IntegerField(initial = 7)
     starttime = models.IntegerField(initial=0)
     finishtime = models.IntegerField(initial=0)
+    payround = models.IntegerField(initial=0)
+    true_y = models.IntegerField(initial=0)
+    prob = models.FloatField(initial=0)
     o = models.StringField()
     lr = models.StringField()
     nb = models.StringField()
@@ -65,22 +69,29 @@ class Player(BasePlayer):
 def creating_session(subsession: Subsession):
         import random
         for player in subsession.get_players():
-            player.participant.payround = 7
+            player.participant.payround = 0
             player.participant.true_y = 2
+            player.treatment = player.participant.treatment
             if subsession.round_number == 1 and player.participant.treatment > 1:
                 player.participant.payround = random.randint(1,6)
+                player.payround = player.participant.payround
                 player.participant.true_y = random.randint(0,1)
+                player.true_y = player.participant.true_y
 
 def set_payoff(player: Player):
-    from scipy.stats import bernoulli
-    if player.round_number == player.participant.payround:
-        if player.participant.true_y == 0:
-            prob = 1 - (1 - player.assessment/100)*(1 - player.assessment/100)
+    if player.subsession.round_number == player.payround:
+        if int(player.true_y) == 1:
+            prob = 1- (1 - player.assessment/100)*(1 - player.assessment/100)
         else:
-            prob = 1 - values['assessment']/100*values['assessment']/100
-        return bernoulli.rvs(prob, size=1)[0] + player.participant.true_y
-    else:
-        return player.participant.true_y
+            prob = 1 - (player.assessment/100)*(player.assessment/100)
+        player.prob = prob
+        if player.participant.treatment > 3:
+            pay = float((3*np.random.choice([0,1], 1, p=[1-prob, prob])[0]) + player.participant.true_y) +1
+            player.payoff = pay
+        if player.participant.treatment == 2 or player.participant.treatment == 3:
+            pay = float(3*np.random.choice([0,1], 1, p=[1-prob, prob])[0]) + 1.5
+            player.payoff = pay
+
 
 
 
@@ -170,19 +181,6 @@ class One_state(Page):
             join = join,
             e = e
         )
-
-    @staticmethod
-    def live_method(player: Player, data):
-        import time
-        if int(data) == 1:
-            player.datatime = int(time.time())
-        if int(data) == 2:
-            player.narrtime = int(time.time())
-        if int(data) == 3:
-            player.datademandtime = int(time.time())
-        if int(data) == 4:
-            player.narrdemandtime = int(time.time())
-        # can just do more cases here!
 
     @staticmethod
     def before_next_page(player, timeout_happened):
