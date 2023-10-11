@@ -3,8 +3,8 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='pilot',
-        display_name="Test for Narratives App",
+        name='narr_pilot',
+        display_name="Narr Pilot",
         app_sequence=['narr_sender', 'narr_receiver_ex1', 'results_and_demographics'],
         num_demo_participants=100,
     )
@@ -35,8 +35,7 @@ ROOMS = [
     dict(
         name='Narratives_Pilot',
         display_name='Pilot for Narratives Experiment',
-    ),
-    dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
+    )
 ]
 
 ADMIN_USERNAME = 'admin'
