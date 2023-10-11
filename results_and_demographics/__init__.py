@@ -163,4 +163,4 @@ class Results_Sen(Page):
     def is_displayed(player: Player):
         return player.participant.treatment < 2
 
-page_sequence = [Demographics, Risk_Narratives,invest_ba, risk_ba, assets_ba, Results]
+page_sequence = [Demographics, Risk_Narratives,invest_ba, risk_ba, assets_ba, Results, Results_Sen]

@@ -40,16 +40,11 @@ def likertScale(label, low, high, n, blank = False):
 
 class Player(BasePlayer):
     assessment = models.IntegerField(min=0, max=100, label="Was, denken Sie, ist die Wahrscheinlichkeit, dass die Hauptbeobachtung hinter dem Fragezeichen eine 1 ist?")
-    score = models.FloatField()
     certainty =likertScale(
         'Auf einer Skala von 1 bis 10, bei der 1 für sehr unsicher und 10 für sehr sicher steht, wie sicher sind Sie sich, dass ihre Einschätzung zutreffend war?',
         '', '', 10)
     starttime = models.IntegerField(initial=0)
     finishtime = models.IntegerField(initial=0)
-    datademandtime = models.IntegerField(initial=0) #the moment the button to reveal is clicked (captcha then appears)
-    narrdemandtime = models.IntegerField(initial=0) #the moment the button to reveal is clicked (captcha then appears)
-    datatime = models.IntegerField(initial=0)  #the moment the data is revealed (after solving captcha)
-    narrtime = models.IntegerField(initial=0)  #the moment the narr is revealed (after solving captcha)
     o = models.StringField()
     lr = models.StringField()
     nb = models.StringField()
@@ -299,7 +294,7 @@ class Quiz_A(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.subsession.round_number == 1 and (player.participant.treatment == 2 or player.participant.treatment == 2)
+        return player.subsession.round_number == 1 and (player.participant.treatment == 2 or player.participant.treatment == 3)
 
 class Quiz_B(Page):
     form_model = 'player'
