@@ -85,11 +85,11 @@ def set_payoff(player: Player):
         else:
             prob = 1 - (player.assessment/100)*(player.assessment/100)
         player.prob = prob
-        if player.participant.treatment > 3:
-            pay = float((3*np.random.choice([0,1], 1, p=[1-prob, prob])[0]) + player.participant.true_y) +1
+        if player.treatment > 3:
+            pay = float((3*np.random.choice([0,1], 1, p=[1-prob, prob])[0]) + player.true_y) +1
             player.payoff = pay
-        if player.participant.treatment == 2 or player.participant.treatment == 3:
-            pay = float(3*np.random.choice([0,1], 1, p=[1-prob, prob])[0]) + 1.5
+        if player.treatment == 2 or player.treatment == 3:
+            pay = float((3*np.random.choice([0,1], 1, p=[1-prob, prob])[0]) + 1.5)
             player.payoff = pay
 
 
