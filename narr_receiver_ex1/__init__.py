@@ -254,19 +254,6 @@ class Two_state(Page):
         )
 
     @staticmethod
-    def live_method(player: Player, data):
-        import time
-        if int(data) == 1:
-            player.datatime = int(time.time())
-        if int(data) == 2:
-            player.narrtime = int(time.time())
-        if int(data) == 3:
-            player.datademandtime = int(time.time())
-        if int(data) == 4:
-            player.narrdemandtime = int(time.time())
-        # can just do more cases here!
-
-    @staticmethod
     def before_next_page(player, timeout_happened):
         import time
         set_payoff(player)
