@@ -41,7 +41,7 @@ def likertScale(label, low, high, n, blank = False):
 class Player(BasePlayer):
     assessment = models.IntegerField(min=0, max=100, label="Was, denken Sie, ist die Wahrscheinlichkeit, dass die Hauptbeobachtung hinter dem Fragezeichen eine 1 ist?")
     certainty =likertScale(
-        'Auf einer Skala von 1 bis 10, bei der 1 für sehr unsicher und 10 für sehr sicher steht, wie sicher sind Sie sich, dass ihre Einschätzung zutreffend war?',
+        'Auf einer Skala von 0 bis 10, bei der 0 für sehr unsicher und 10 für sehr sicher steht, wie sicher sind Sie sich, dass ihre Einschätzung zutreffend war?',
         '', '', 10)
     treatment = models.IntegerField(initial = 8)
     starttime = models.IntegerField(initial=0)
@@ -167,9 +167,9 @@ class One_state(Page):
         player.starttime = int(time.time())
 
         if present[player.round_number-1] < 3:
-            e = ['Immer, wenn Nebenbedingung (NB)']
+            e = ['Immer, wenn Nebenbedingung NB']
         else:
-            e = ['Fast immer, wenn Nebenbedingung (NB)']
+            e = ['Fast immer, wenn Nebenbedingung NB']
 
         return dict(
             hb=hb,
@@ -238,9 +238,9 @@ class Two_state(Page):
         player.starttime = int(time.time())
 
         if present[player.round_number-1] < 3:
-            e = ['Immer, wenn Nebenbedingung (NB)']
+            e = ['Immer, wenn Nebenbedingungen NB']
         else:
-            e = ['Fast immer, wenn Nebenbedingung (NB)']
+            e = ['Fast immer, wenn Nebenbedingungen NB']
 
         return dict(
             hb=hb,

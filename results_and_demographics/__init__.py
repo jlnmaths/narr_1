@@ -59,16 +59,16 @@ class Player(BasePlayer):
 
     study = models.StringField(label="Was studieren Sie?")
     politics =likertScale(
-        'Auf einer Skala von 1 bis 10, bei der 1 für sehr links und 10 für sehr rechts steht, wo ordnen Sie sich politisch ein?',
+        'Auf einer Skala von 0 bis 10, bei der 0 für sehr links und 10 für sehr rechts steht, wo ordnen Sie sich politisch ein?',
         '', '', 10)
 
     simplicity_1 =likertScale(
-        'Ich bevorzuge einfache Erklärungen (1 bis 10, 1 = trifft überhaupt nicht zu, 10 = trifft vollkommen zu).',
+        'Ich bevorzuge einfache Erklärungen (0 bis 10, 0 = trifft überhaupt nicht zu, 10 = trifft vollkommen zu).',
         '', '', 10)
     simplicity_2 = models.StringField(label="Ich bin davon überzeugt, dass die meisten Menschen einfache Erklärungen bevorzugen.",
         choices=['Ja', 'Nein'])
     dataverbal_1 =likertScale(
-        'Ich bevorzuge Daten über verbale Erklärungen (1 bis 10, 1 = trifft überhaupt nicht zu, 10 = trifft vollkommen zu).',
+        'Ich bevorzuge Daten über verbale Erklärungen (0 bis 10, 0 = trifft überhaupt nicht zu, 10 = trifft vollkommen zu).',
         '', '', 10)
     dataverbal_2 = models.StringField(label="Ich bin davon überzeugt, dass die meisten Menschen Daten über verbale Erklärungen bevorzugen.",
         choices=['Ja', 'Nein'])
