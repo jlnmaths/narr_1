@@ -43,7 +43,7 @@ class Player(BasePlayer):
     certainty =likertScale(
         'Auf einer Skala von 1 bis 10, bei der 1 für sehr unsicher und 10 für sehr sicher steht, wie sicher sind Sie sich, dass ihre Einschätzung zutreffend war?',
         '', '', 10)
-    treatment = models.IntegerField(initial = 7)
+    treatment = models.IntegerField(initial = 8)
     starttime = models.IntegerField(initial=0)
     finishtime = models.IntegerField(initial=0)
     payround = models.IntegerField(initial=0)
