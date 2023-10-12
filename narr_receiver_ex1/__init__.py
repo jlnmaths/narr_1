@@ -69,14 +69,12 @@ class Player(BasePlayer):
 def creating_session(subsession: Subsession):
         import random
         for player in subsession.get_players():
-            player.participant.payround = 0
-            player.participant.true_y = 2
-            player.treatment = player.participant.treatment
-            if subsession.round_number == 1 and player.participant.treatment > 1:
+            if subsession.round_number == 1:
                 player.participant.payround = random.randint(1,6)
-                player.payround = player.participant.payround
                 player.participant.true_y = random.randint(0,1)
-                player.true_y = player.participant.true_y
+            player.payround = player.participant.payround
+            player.true_y = player.participant.true_y
+            player.treatment = player.participant.treatment
 
 def set_payoff(player: Player):
     if player.subsession.round_number == player.payround:
